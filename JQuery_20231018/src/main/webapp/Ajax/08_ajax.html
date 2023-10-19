@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>AJAX 통신</title>
+	<script src="../script/jquery-3.7.1.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			var apiKey = "회원가입후 인증키 받아야";
+			var city = "Seoul";
+			var apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" +
+				city + "&appid=" + apiKey;
+
+			$.ajax({
+				url: apiUrl,
+				type: "GET",
+				success: function (result) {
+					var tempInCelsius = Math.round(result.main.temp - 273.15);
+					$("#result").html("<h3>" + city + "의 현재 온도는" + tempInCelsius + "</h3>");
+				},//function_END
+				error: function (error) {
+					console.log(`Error:${error}`);
+				},//error_END
+			});//ajax_END
+		});
+	</script>
+
+</head>
+
+<body>
+	<div id="result"></div>
+</body>
+
+</html>
